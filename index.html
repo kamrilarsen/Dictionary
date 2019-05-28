@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Dictionary</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <h2 class="move">Discover the Definition</h2>
+        <form v-on:submit.prevent="searchWord" class="move">
+            <input type="text" v-model="searchEntry">
+            <button type="submit">Search</button>
+        </form>
+        <div v-if="loading">
+            <p class="move">Loading...</p>
+        </div>
+
+        <div v-else>
+            <div class="row">
+                <div class="col col-sm-8">
+                    <div v-for="definition in definitionList" class="backgroundbox">
+                        <p><b>Part of Speech:</b> {{definition.speechPart}}</p>
+                        <p><b>Date of Origin:</b> {{definition.date}}</p>
+                        <p><b>Definition:</b></p>
+                        <ul>
+                            <li v-for="def in definition.shortDefs">
+                                <p>{{def}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col col-sm-4">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer><a href="https://github.com/byu-cs-260-spring-2019/midterm-1-kamrilarsen">GitHub Repository</a></footer>
+
+    <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</body>
+
+</html> 
