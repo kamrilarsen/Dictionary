@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Antic' rel='stylesheet'>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./styles.css" />
     <title>Dictionary</title>
@@ -10,33 +11,65 @@
 <body>
     <div id="app">
 
-        <h2 class="move">Discover the Definition</h2>
-        <form v-on:submit.prevent="searchWord" class="move">
+        <h1 class="move"><b>Discover the Definition</b></h1>
+        <form v-on:submit.prevent="searchWord" class="move entry">
             <input type="text" v-model="searchEntry">
             <button type="submit">Search</button>
         </form>
-        <div v-if="loading">
-            <p class="move">Loading...</p>
+        <div v-if="loading" class="loading">
+            <h4 class="move">Loading...</h4>
         </div>
 
         <div v-else>
             <div class="row">
                 <div class="col col-sm-8">
-                    <div v-for="definition in definitionList" class="backgroundbox">
-                        <p><b>Part of Speech:</b> {{definition.speechPart}}</p>
-                        <p><b>Date of Origin:</b> {{definition.date}}</p>
-                        <p><b>Definition:</b></p>
-                        <ul>
-                            <li v-for="def in definition.shortDefs">
-                                <p>{{def}}</p>
-                            </li>
-                        </ul>
+                    <div v-if="thesError === ''">
+                        <h2 class="align">Definitions for:</h2>
+                        <div v-for="definition in definitionList" class="backgroundbox">
+                            <h3 class="underline">{{definition.word}}</h3>
+                            <p><b>Part of Speech:</b> {{definition.speechPart}}</p>
+                            <p><b>Date of Origin:</b> {{definition.date}}</p>
+                            <p><b>Definition:</b></p>
+                            <ul class="dashed">
+                                <li v-for="def in definition.shortDefs">
+                                    {{def}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div v-for="definition in definitionList" class="backgroundbox">
+                            <h4>{{definition.error}}</h4>
+                            <ul class="dashed">
+                                <li v-for="suggs in definition.suggestions">
+                                    {{suggs}}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col col-sm-4">
-                    <ul>
-
-                    </ul>
+                    <div v-if="thesError === ''">
+                        <h2 class="align">Related words for:</h2>
+                        <div v-for="thes in thesaurus" class="backgroundbox">
+                            <div v-if="(thes.Syns !== []) && (thes.Ants !== [])">
+                                <h3 class="underline">{{thes.word}}</h3>
+                                <p><b>Part of Speech:</b> {{thes.speechPart}}</p>
+                                <p><b>Synonyms:</b></p>
+                                <ul class="dashed">
+                                    <li v-for="word in thes.Syns">
+                                        {{word}}
+                                    </li>
+                                </ul>
+                                <p><b>Antonyms:</b></p>
+                                <ul class="dashed">
+                                    <li v-for="word in thes.Ants">
+                                        {{word}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

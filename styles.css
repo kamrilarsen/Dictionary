@@ -1,9 +1,23 @@
-h2 {
+h1 {
     margin-top: 2%;
 }
 
 p {
     margin-bottom: 0;
+}
+
+ul.dashed {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul.dashed > li {
+    margin-left: 15px;  
+}
+
+ul.dashed > li::before {
+    content: "-";
+    margin-left: -15px;
 }
 
 html { 
@@ -15,6 +29,8 @@ body {
     padding:0; 
     margin:0; 
     position:relative; 
+    background-color: rgb(215, 228, 245);
+    font-family: 'Antic';
 }
   
 body::after {
@@ -40,11 +56,28 @@ footer {
     margin-bottom: 18px;
     margin-left: 30px;
     margin-right: 30px;
-    background-color: rgb(204, 224, 252);
+    background-color: white;
     border: 1px solid black;
     padding: 15px;
 }
 
-#app {
-    margin-left: 2%;
+.dashed {
+    margin-left: 3%;
+}
+
+.align {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.loading {
+    margin-top: 40px;
+}
+
+.entry {
+    margin-bottom: 20px;
 }
